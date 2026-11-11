@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#21143d">
+<title>Hjayat | حجايات</title>
+<style>
+:root{--bg:#160f29;--panel:#24183d;--panel2:#30214d;--gold:#f2c66d;--turq:#5ed6c2;--text:#fff8ed;--muted:#c9bddb;--bad:#ff8c9b;--good:#74e0a7}
+*{box-sizing:border-box}body{margin:0;background-color:#160f29;background-image:
+radial-gradient(circle at 15% 0%,#392354 0,transparent 48%),
+repeating-linear-gradient(45deg,transparent 0 22px,#f2c66d12 22px 24px,transparent 24px 46px),
+repeating-linear-gradient(-45deg,transparent 0 22px,#5ed6c212 22px 24px,transparent 24px 46px);
+background-attachment:fixed;color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh;position:relative}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:
+linear-gradient(45deg,transparent 43%,#f2c66d 44%,#f2c66d 46%,transparent 47%),
+linear-gradient(-45deg,transparent 43%,#5ed6c2 44%,#5ed6c2 46%,transparent 47%);
+background-size:56px 56px;background-position:0 0,28px 28px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+button{font:inherit;cursor:pointer}.app{width:min(100%,560px);margin:auto;padding:22px 16px 40px}.top{display:flex;justify-content:space-between;align-items:center;gap:10px}.brand{font-size:30px;font-weight:900;letter-spacing:.4px;color:var(--gold)}.brand small{display:block;font-size:14px;color:var(--muted);font-weight:600;letter-spacing:0}.pill{background:#ffffff12;border:1px solid #ffffff20;border-radius:999px;padding:8px 12px;color:var(--muted);font-size:13px}
+.hero{margin:24px 0 18px;padding:22px 20px;border:1px solid #f2c66d88;border-radius:24px;background:linear-gradient(135deg,#3a2858,#211638);box-shadow:0 14px 40px #0003}.hero h1{font-size:25px;margin:0 0 8px}.hero p{margin:0;color:var(--muted);line-height:1.8}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.stat{background:var(--panel);border:1px solid #ffffff14;border-radius:16px;padding:12px}.stat b{display:block;color:var(--gold);font-size:22px}.stat span{font-size:12px;color:var(--muted)}
+.card{background:var(--panel);border:1px solid #ffffff18;border-radius:22px;padding:18px;margin-top:14px}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.eyebrow{color:var(--turq);font-weight:700;font-size:13px}.progress{height:7px;background:#ffffff18;border-radius:99px;overflow:hidden;margin:13px 0 18px}.bar{height:100%;background:linear-gradient(90deg,var(--turq),var(--gold));width:0%;transition:width .25s}
+.question{font-size:23px;font-weight:800;line-height:1.8;margin:10px 0 18px}.choices{display:grid;gap:10px}.choice{width:100%;text-align:right;border:1px solid #ffffff25;background:var(--panel2);color:var(--text);padding:14px 15px;border-radius:14px;line-height:1.6;transition:.15s}.choice:active{transform:scale(.99)}.choice.selected{border-color:var(--gold);background:#59452d}.choice.correct{border-color:var(--good);background:#1c493c}.choice.wrong{border-color:var(--bad);background:#542b3c}.choice:disabled{cursor:default;opacity:1}
+.feedback{margin-top:13px;border-radius:13px;padding:12px;line-height:1.7;display:none}.feedback.show{display:block}.feedback.good{background:#1b473a;color:#c9ffe2}.feedback.bad{background:#4b2939;color:#ffe0e5}
+.primary{border:0;background:linear-gradient(100deg,var(--gold),#ffe2a1);color:#281a39;font-weight:900;border-radius:14px;padding:13px 18px;width:100%;margin-top:14px}.secondary{border:1px solid #ffffff35;background:transparent;color:var(--text);border-radius:12px;padding:10px 14px}
+.footer{text-align:center;color:#9e91b5;font-size:12px;margin:24px 0 0;line-height:1.8}.hidden{display:none!important}.result{text-align:center;padding:20px 5px}.result .big{font-size:48px;color:var(--gold);font-weight:900}.result h2{margin:6px 0}.result p{color:var(--muted);line-height:1.8}
+@media(min-width:520px){.app{padding-top:30px}.hero{padding:28px}.question{font-size:26px}}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div class="brand">Hjayat <small>حجايات مغربية 🇲🇦</small></div>
+    <div class="pill">نسخة تجريبية</div>
+  </header>
+
+  <section class="hero">
+    <h1>واش فطين فالحجايات؟ ✨</h1>
+    <p>كمّل المثل المغربي واختار الجواب الصحيح من بين أربعة اختيارات. جمع النقط وطلع فالمستويات!</p>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><b id="totalScore">0</b><span>النقط ديالك</span></div>
+    <div class="stat"><b id="level">1</b><span>المستوى</span></div>
+  </section>
+
+  <section class="row" style="gap:8px;margin:14px 0">
+    <button id="proverbTab" class="secondary" style="flex:1;border-color:var(--gold);color:var(--gold)">الأمثال والحجايات</button>
+    <button id="tashelhitTab" class="secondary" style="flex:1">تامازيغت أيت سغروشن ⵣ</button>
+  </section>
+
+  <section id="game" class="card">
+    <div class="row"><span class="eyebrow" id="category">أمثال مغربية</span><span class="pill" id="counter">1 / 10</span></div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+    <div class="question" id="question">لي دار راسو فالنخالة...</div>
+    <div class="choices" id="choices"></div>
+    <div id="feedback" class="feedback" role="status"></div>
+    <button id="next" class="primary hidden">السؤال الموالي</button>
+  </section>
+
+  <section id="result" class="card result hidden">
+    <div class="big" id="roundScore">0</div>
+    <h2>ساليتي هاد الجولة! 🎉</h2>
+    <p id="resultText"></p>
+    <button class="primary" id="restart">عاود لعب</button>
+  </section>
+
+  <div class="footer">Hjayat | حجايات<br>الأمثال ممكن تختلف صياغتها من منطقة لمنطقة.</div>
+</main>
+<script>
+const proverbQuestions = [
+ {q:"لي دار راسو فالنخالة...",a:["ينقبوه الدجاج","ياكلوه القطوط","يطير مع الريح","يولي سلطان"],c:0,why:"المثل كيتقال على اللي كيدخل راسو فشي موقف وكيولي عرضة للمشاكل."},
+ {q:"لي تسحر مع الدراري الصغار...",a:["ينعس بكري","يصبح فاطر","يشبع بكري","يفيق مع الفجر"],c:1,why:"الصيغة اللي عطيتينا: لي تسحر مع الدراري الصغار تيصبح فاطر."},
+ {q:"لالة زينة وزادها...",a:["الذهب","الحناء","نور الحمام","الما والورد"],c:2,why:"هاد هي التكملة المتداولة للمثل."},
+ {q:"لي بغا العسل...",a:["يصبر لقريص النحل","يمشي للسوق","يزرع الورد","يطلبو من جارو"],c:0,why:"المعنى: اللي بغا نتيجة زوينة خاصو يصبر ويتحمل الصعوبات."},
+ {q:"مول الفز...",a:["كيضحك","كيقفز","كيصبر","كيهرب"],c:1,why:"مثل كيتقال على اللي كيتخلع ولا كيتفاجأ وكيبان عليه."},
+ {q:"اللي ما عندو كبير...",a:["يشريلو كبير","يبقى صغير","يسول الصغير","يمشي بعيد"],c:0,why:"المثل كيشير لقيمة النصيحة والخبرة ديال الكبار."},
+ {q:"آش خصك أ العريان؟...",a:["صباط جديد","خاتم أ مولاي","دار كبيرة","كسوة العيد"],c:1,why:"جواب ساخر معروف فالأمثال المغربية."},
+ {q:"جا يكحلها...",a:["زادها زواق","عماها","خلاها زوينة","صبغها"],c:1,why:"كتقال ملي شي واحد باغي يصلح شي حاجة وكيزيد يخربقها."},
+ {q:"اللي حفر شي حفرة...",a:["يجيب ليها الما","يطيح فيها","يسدها بالحجر","يعمرها تراب"],c:1,why:"المعنى: اللي كيدبر الضرر لغيرو ممكن يرجع عليه."},
+ {q:"اللي فاتك بليلة...",a:["فاتك بحيلة","سبقك بخطوة","ربح عليك","عندو ليلة طويلة"],c:0,why:"كتتقال على أهمية التجربة والسبق فالمعرفة."},
+ {q:"عندو سنان وما كياكلش، شكون هو؟",a:["المشط","المنشار","الديك","التمساح"],c:0,why:"المشط فيه السنان ولكن ما كياكلش."},
+ {q:"عندو عين وحدة وما كيشوفش، شكون هو؟",a:["السمكة","الإبرة","الكاميرا","النافذة"],c:1,why:"عين الإبرة هي الثقب اللي كيدوز منو الخيط."},
+ {q:"كلما خديتي منو كيكبر، شنو هو؟",a:["الكيس","الحفرة","العمر","البحر"],c:1,why:"كلما حيدتي التراب من الحفرة كتوسع وكتكبر."},
+ {q:"كيبان معاك فالضو وكيختافي فالظلام، شكون هو؟",a:["الصوت","الظل","الهواء","الريح"],c:1,why:"الظل كيبان ملي كيكون الضوء وشي حاجة كتحجبو."},
+ {q:"عندو أوراق وماشي شجرة، وعندو غلاف وماشي حيوان، شنو هو؟",a:["الكتاب","البطيخة","الباب","القميص"],c:0,why:"الكتاب فيه الأوراق وعندو غلاف."},
+ {q:"بيت بلا بيبان ولا شرجم، وداخلو صفار وبياض، شنو هو؟",a:["المدرسة","البيضة","القوقعة","العلبة"],c:1,why:"البيضة عندها القشرة وداخلها البياض والصفار."},
+ {q:"شنو الحاجة اللي كتشوفك وما عندهاش عينين؟",a:["المراية","الكرسي","الكتاب","الساعة"],c:0,why:"المراية كتعكس صورتك، وهادشي علاش كتجي فالحجاية بهاد الصيغة."},
+ {q:"كيطلع ويهبط وباقي فبلاصتو، شنو هو؟",a:["المصعد","الدرج","الطّيارة","الطوبيس"],c:1,why:"الدرج كتطلع وتهبط منو، ولكن هو ثابت فبلاصتو."},
+ {q:"شنو الحاجة اللي كتكتب وما كتقراش؟",a:["القلم","التلميذ","الكتاب","النظارات"],c:0,why:"القلم كيكتب ولكن ما كيقراش."},
+ {q:"شنو الحاجة اللي كتدخل للماء وما كتغرقش؟",a:["الحجر","الضو","الخشب","الورق"],c:1,why:"الضوء كيوصل لداخل الماء وماشي جسم كيغرق."}
+
+];
+
+const tashelhitQuestions = [
+ {q:"كيفاش نقولو «سميتي محمد» بلسان أيت سغروشن؟",a:["isminw muha","mism:š","mani muha","ɣri ɣbsa"],c:0,why:"isminw muha = اسمي محمد."},
+ {q:"شنو معنى «mism:š»؟",a:["فين محمد؟","شنو سميتك؟ (للمذكر)","واش عندك الدراري؟","صباح الخير"],c:1,why:"mism:š = ما اسمك؟ للمذكر."},
+ {q:"كيفاش نقولو «فين محمد؟»؟",a:["mani muha","ha muha irahd:","isminw muha","lwašun labas"],c:0,why:"mani muha = أين محمد؟"},
+ {q:"شنو معنى «lwašun labas?»؟",a:["واش عندك الفلوس؟","كيف دايرة العائلة؟","فين مشى الولد؟","شنو سميتك؟"],c:1,why:"السؤال على حال العائلة."},
+ {q:"كيفاش نقولو «صباح الخير آ محمد»؟",a:["sbah l xir amuha","s:alamur:lik:um","ha n:ɣnas","mani muha"],c:0,why:"sbah l xir amuha = صباح الخير يا محمد."},
+ {q:"شنو معنى «s:alamur:lik:um»؟",a:["شكراً","السلام عليكم","تصبح على خير","فين غادي؟"],c:1,why:"صيغة التحية المسجلة في مرجع أيت سغروشن."},
+ {q:"كيفاش نقولو «ما عنديش الفلوس»؟",a:["uryri lflus","ɣri ɣbsa ntfunasin","ɣrs išt ntrbat:","tl:a da"],c:0,why:"uryri lflus = ليس لدي مال."},
+ {q:"شنو معنى «ɣri ɣbsa ntfunasin»؟",a:["عندي أربعة بقرات","عندي سبعة دراري","ما عنديش الفلوس","عندي أتاي"],c:0,why:"المعنى: عندي أربع بقرات."},
+ {q:"كيفاش نقولو «ها هو النعناع»؟",a:["han at:aym:š","ha n:ɣnas","ha muha irahd:","tl:a da"],c:1,why:"ha n:ɣnas = ها هو النعناع."},
+ {q:"شنو معنى «han at:aym:š»؟",a:["ها هو أتايك","ها هو النعناع","فين أتاي؟","بغيت أتاي"],c:0,why:"المعنى: ها هو أتايك."},
+ {q:"كيفاش نقولو «هي هنا»؟",a:["tl:a da","traḥ yr txamt","q:imm dy fas","isminw muha"],c:0,why:"tl:a da = هي هنا."},
+ {q:"شنو معنى «traḥ yr txamt»؟",a:["هي هنا","مشات للخيمة","رجعات للدار","دخلات للسوق"],c:1,why:"traḥ yr txamt = ذهبت إلى الخيمة."},
+ {q:"كيفاش نقولو «بغيت نمشي للسوق»؟",a:["bryix adrahr yr s:uq:","mani muha","mism:š","ha n:ɣnas"],c:0,why:"bryix adrahr yr s:uq: = أريد الذهاب إلى السوق."},
+ {q:"شنو معنى «adirah yr tad:artn:s»؟",a:["غادي يمشي لدارو","غادي يجي غدا","غادي يشرب أتاي","غادي للسوق"],c:0,why:"المعنى: سوف يذهب إلى بيته."},
+ {q:"كيفاش نقولو «محمد خدام فالرباط»؟",a:["l:ayd:m muha yr:bad","ha muha irahd:","muha daryaz","isminw muha"],c:0,why:"l:ayd:m muha yr:bad = محمد يعمل في الرباط."},
+ {q:"شنو معنى «ha muha irahd:»؟",a:["ها محمد جاي","محمد مشى","فين محمد؟","محمد ناعس"],c:0,why:"المعنى: ها هو محمد قادم."},
+ {q:"كيفاش نقولو «الرجل شرب أتاي»؟",a:["iswu uryaz at:ay","aryaz iʕdln","ɣrs išt ntrbat:","uryri lflus"],c:0,why:"iswu uryaz at:ay = شرب الرجل الشاي."},
+ {q:"شنو معنى «ntš»؟",a:["أنا","أنتَ","هو","نحن"],c:0,why:"ntš ضمير المتكلم المفرد."},
+ {q:"شنو معنى «šk:»؟",a:["هي","أنتَ (مفرد مذكر)","أنا","هم"],c:1,why:"šk: ضمير المخاطب المفرد المذكر."},
+ {q:"شنو معنى «nt:a»؟",a:["هو","هي","نحن","أنتم"],c:0,why:"nt:a = هو."},
+ {q:"شنو معنى «nt:at»؟",a:["أنا","هي","هو","هم"],c:1,why:"nt:at = هي."},
+ {q:"كيفاش نقولو «أختي»؟",a:["ultma","ib:a","im:a","lwašun"],c:0,why:"ultma = أخت."},
+ {q:"شنو معنى «ib:a»؟",a:["أمي","أبي","أختي","ابني"],c:1,why:"ib:a = أبي."},
+ {q:"شنو معنى «im:a»؟",a:["أمي","أبي","أخي","بنتي"],c:0,why:"im:a = أمي."},
+ {q:"شنو معنى «aryaz»؟",a:["امرأة","رجل","طفل","أخت"],c:1,why:"aryaz = رجل."},
+ {q:"شنو معنى «tamt:ut:»؟",a:["امرأة","رجل","طفلة","أم"],c:0,why:"tamt:ut: = امرأة."},
+ {q:"شنو معنى «arba»؟",a:["بنت","ولد","أب","أخ"],c:1,why:"arba = ولد."},
+ {q:"شنو معنى «tarbat:»؟",a:["بنت","ولد","أم","أخت"],c:0,why:"tarbat: = بنت."},
+ {q:"شنو معنى «azru»؟",a:["الرأس","الحجر","العين","الطريق"],c:1,why:"azru = حجر."},
+ {q:"شنو معنى «azl:if»؟",a:["الرأس","الحجر","اليد","العين"],c:0,why:"azl:if = الرأس في أيت سغروشن."},
+ {q:"شنو معنى «tiš:ut»؟",a:["تلّة / ربوة","دار","طريق","سوق"],c:0,why:"tiš:ut = تلّة."}
+];
+let questions = proverbQuestions;
+
+let index=0,round=0,score=Number(localStorage.getItem("hjayatScore")||0),answered=false;
+const $=id=>document.getElementById(id);
+function updateStats(){ $("totalScore").textContent=score; $("level").textContent=Math.floor(score/100)+1; }
+function render(){
+ answered=false; const item=questions[index];
+ $("category").textContent = questions === tashelhitQuestions ? "تامازيغت أيت سغروشن ⵣ" : "أمثال وحجايات مغربية"; $("counter").textContent=(index+1)+" / "+questions.length;
+ $("bar").style.width=((index)/questions.length*100)+"%"; $("question").textContent=item.q;
+ $("feedback").className="feedback"; $("feedback").textContent=""; $("next").classList.add("hidden");
+ $("choices").innerHTML="";
+ item.a.forEach((answer,i)=>{
+  const b=document.createElement("button"); b.className="choice"; b.textContent=String.fromCharCode(1571+i)+") "+answer;
+  b.addEventListener("click",()=>choose(i)); $("choices").appendChild(b);
+ });
+}
+function choose(i){
+ if(answered)return; answered=true; const item=questions[index]; const buttons=[...$("choices").children];
+ buttons.forEach((b,n)=>{b.disabled=true;if(n===item.c)b.classList.add("correct");else if(n===i)b.classList.add("wrong");});
+ const ok=i===item.c; const f=$("feedback"); f.className="feedback show "+(ok?"good":"bad");
+ f.textContent=(ok?"صحيح! برافو عليك 🎉 +10 نقط. ":"ماشي هادي، الجواب الصحيح هو: "+item.a[item.c]+". ")+item.why;
+ if(ok){score+=10;round+=10;localStorage.setItem("hjayatScore",score);updateStats();}
+ $("next").textContent=index===questions.length-1?"شوف النتيجة":"السؤال الموالي"; $("next").classList.remove("hidden");
+}
+$("next").addEventListener("click",()=>{
+ if(index<questions.length-1){index++;render();}
+ else{ $("game").classList.add("hidden");$("result").classList.remove("hidden");$("roundScore").textContent=round+" نقطة";$("resultText").textContent="جمعتي "+round+" نقطة فهاد الجولة. المجموع ديالك هو "+score+" نقطة.";$("bar").style.width="100%";}
+});
+$("restart").addEventListener("click",()=>{index=0;round=0;$("result").classList.add("hidden");$("game").classList.remove("hidden");render();});
+function setCategory(which){
+ questions = which==="tashelhit" ? tashelhitQuestions : proverbQuestions;
+ index=0; round=0;
+ $("proverbTab").style.borderColor = which==="proverb" ? "var(--gold)" : "#ffffff35";
+ $("proverbTab").style.color = which==="proverb" ? "var(--gold)" : "var(--text)";
+ $("tashelhitTab").style.borderColor = which==="tashelhit" ? "var(--turq)" : "#ffffff35";
+ $("tashelhitTab").style.color = which==="tashelhit" ? "var(--turq)" : "var(--text)";
+ $("result").classList.add("hidden"); $("game").classList.remove("hidden");
+ $("category").textContent = which==="tashelhit" ? "تامازيغت أيت سغروشن ⵣ" : "أمثال وحجايات مغربية";
+ render();
+}
+$("proverbTab").addEventListener("click",()=>setCategory("proverb"));
+$("tashelhitTab").addEventListener("click",()=>setCategory("tashelhit"));
+updateStats();render();
+</script>
+</body>
+</html>
